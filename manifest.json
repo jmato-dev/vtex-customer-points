@@ -22,6 +22,16 @@
     },
     {
       "name": "colossus-write-logs"
+    },
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "portal.vtexcommercestable.com.br",
+        "path": "/api/oms/pvt/orders/*"
+      }
+    },
+    {
+      "name": "OMSViewer"
     }
   ],
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"

@@ -6,16 +6,17 @@ export async function orderStates(
   // probably will use payment-approved & caceled
   // see: https://help.vtex.com/en/tutorial/fluxo-de-pedido/
 
-  // Call Orders API to get details about amount & user
-  // Use ctx.vtex.authToken for call IO APIs
-  // Use ctx.body.orderId
+  // console.log(ctx.body);
 
-  console.log(ctx.body);
-  
+  const {
+    totals: [ { value } ],
+    clientProfileData: { userProfileId }
+  } = await ctx.clients.order.order(ctx.body.orderId);
+
   if (ctx.body.currentState === 'order-created')
-    console.log('Add points');
+    console.log('Add points', userProfileId, value);
   else
-    console.log('Debit points');
+    console.log('Debit points', userProfileId, value);
 
   await next()
 }
