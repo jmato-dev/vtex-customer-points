@@ -10,5 +10,20 @@
       "sender": "vtex.orders-broadcast",
       "topics": ["cancel", "order-created"]
     }
+  },
+  "routes": {
+    "create": {
+      "path": "/_v/customer_points/",
+      "public": true
+    },
+    "points": {
+      "path": "/_v/customer_points/:userId",
+      "public": true
+    },
+    "debit": {
+      "path": "/_v/customer_points/:userId/debit",
+      "public": true
+    }
+
   }
 }

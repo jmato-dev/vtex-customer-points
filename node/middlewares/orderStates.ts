@@ -14,9 +14,9 @@ export async function orderStates(
   } = await ctx.clients.order.order(ctx.body.orderId);
 
   if (ctx.body.currentState === 'order-created')
-    console.log('Add points', userProfileId, value);
+    console.log('Add points', userProfileId, Math.trunc(value / 100));
   else
-    console.log('Debit points', userProfileId, value);
+    console.log('Debit points', userProfileId, Math.trunc(value / 100));
 
   await next()
 }

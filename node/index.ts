@@ -5,10 +5,17 @@ import {
   ServiceContext,
   RecorderState,
   EventContext,
+  method
 } from '@vtex/api'
 
 import { Clients } from './clients'
+
 import { orderStates } from './middlewares/orderStates'
+
+import { pointsCreateService } from './middlewares/pointsCreate'
+import { pointsGetHandler } from './handlers/pointsGet'
+import { pointsPatchHandler } from './handlers/pointsPatch'
+import { pointsDebitService } from './middlewares/pointsDebit';
 
 const TIMEOUT_MS = 800
 
@@ -57,4 +64,16 @@ export default new Service({
   events: {
     orderStates,
   },
-})
+  routes: {
+    create: method({
+      POST: [pointsCreateService],
+    }),
+    points: method({
+      GET: [pointsGetHandler],
+      PATCH: [pointsPatchHandler],
+    }),
+    debit: method({
+      PATCH: [pointsDebitService],
+    }),
+  },
+});

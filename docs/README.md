@@ -4,4 +4,7 @@ A vtex app where customer earn points based on the value spent on their purchase
 
 ## How this is accomplished?
 
-Implements an event handler receiving status updates from OMS Feed.
+API it's implemented using Masterdata as storage solution.
+
+An event handler receive status updates from OMS Feed.
+Gets relevant information of the updated order from Orders API.
