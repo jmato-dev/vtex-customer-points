@@ -25,17 +25,6 @@ export async function pointsGetHandler(ctx: Context, next: () => Promise<any>) {
       status = 404;
     }
 
-    // else {
-    //   await ctx.clients.masterdata.createDocument({
-    //     dataEntity: 'customer_points',
-    //     fields: {
-    //       userId: params.userId,
-    //       points: 0,
-    //     },
-    //     schema: 'v1'
-    //   });
-    // }
-
     ctx.status = status;
 
     if (status === 200)

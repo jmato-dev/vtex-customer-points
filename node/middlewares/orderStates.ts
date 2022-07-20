@@ -13,6 +13,9 @@ export async function orderStates(
     clientProfileData: { userProfileId }
   } = await ctx.clients.order.order(ctx.body.orderId);
 
+  const points = await ctx.clients.points.getPoints(userProfileId);
+  console.log ('#### points ####', points);
+
   if (ctx.body.currentState === 'order-created')
     console.log('Add points', userProfileId, Math.trunc(value / 100));
   else

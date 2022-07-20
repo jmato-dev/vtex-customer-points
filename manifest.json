@@ -24,6 +24,9 @@
       "name": "colossus-write-logs"
     },
     {
+      "name": "OMSViewer"
+    },
+    {
       "name": "outbound-access",
       "attrs": {
         "host": "portal.vtexcommercestable.com.br",
@@ -31,7 +34,14 @@
       }
     },
     {
-      "name": "OMSViewer"
+      "name": "POWER_USER_DS"
+    },
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "jmatoorderlistener--dreamscape.myvtex.com",
+        "path": "/*"
+      }
     },
     {
       "name": "ADMIN_DS"
