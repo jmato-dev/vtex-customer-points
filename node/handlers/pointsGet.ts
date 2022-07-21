@@ -1,3 +1,5 @@
+import { pointsGetDB } from "../common/pointsGet";
+
 export async function pointsGetHandler(ctx: Context, next: () => Promise<any>) {
     const {
       vtex: {
@@ -7,16 +9,7 @@ export async function pointsGetHandler(ctx: Context, next: () => Promise<any>) {
 
     let status = 200, body = null;
 
-    const [storedCustomer] = await ctx.clients.masterdata.searchDocuments<{points: number, userId: string}>({
-      dataEntity: 'customer_points',
-      fields: ['points', 'userId'],
-      pagination: {
-        page: 1,
-        pageSize: 1,
-      },
-      schema: 'v1',
-      where: `userId=${params.userId}`
-    });
+    const storedCustomer = await pointsGetDB(ctx.clients.masterdata, <string>params.userId);
 
     if (storedCustomer) {
       body = storedCustomer.points;

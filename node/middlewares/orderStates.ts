@@ -1,3 +1,7 @@
+import { pointsGetDB } from "../common/pointsGet";
+import { pointsCreateDB } from "../common/pointsCreate";
+import { pointsPatchDB } from "../common/pointsPatch";
+
 export async function orderStates(
   ctx: StatusChangeContext,
   next: () => Promise<any>
@@ -13,11 +17,16 @@ export async function orderStates(
     clientProfileData: { userProfileId }
   } = await ctx.clients.order.order(ctx.body.orderId);
 
-  const points = await ctx.clients.points.getPoints(userProfileId);
-  console.log ('#### points ####', points);
+  if (ctx.body.currentState === 'order-created'){
+    const plus = Math.trunc(value / 100);
 
-  if (ctx.body.currentState === 'order-created')
-    console.log('Add points', userProfileId, Math.trunc(value / 100));
+    let customer = await pointsGetDB(ctx.clients.masterdata, userProfileId);
+
+    if (!customer)
+      customer = await pointsCreateDB(ctx.clients.masterdata, userProfileId, plus)
+    else
+      await pointsPatchDB(ctx.clients.masterdata, customer.userId, '' + (customer.points + plus))
+  }
   else
     console.log('Debit points', userProfileId, Math.trunc(value / 100));
 
